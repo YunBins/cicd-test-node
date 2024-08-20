@@ -29,6 +29,8 @@ jobs:
           cp ./appspec.yml ./deploy-node/
           cp ./Dockerfile ./deploy-node/
           cp ./scripts/*.sh ./deploy-node/
+          cp ./package.json ./deploy-node/
+          cp ./package-lock.json ./deploy-node/
           zip -r -qq -j ./cicd-test-node-build.zip ./deploy-node
           
       - name: Configure AWS credentials
