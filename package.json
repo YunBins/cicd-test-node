@@ -2,7 +2,7 @@
   "name": "cicd-test-node",
   "version": "1.0.0",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "nodemon src/server.js"
   },
   "license": "ISC",
   "dependencies": {
