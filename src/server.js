@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 app.get("/health-check", (req, res)=> {
-    console.log("up");
+    res.send("up");
 })
 
 const PORT = process.env.PORT || 7070;
