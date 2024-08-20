@@ -55,7 +55,7 @@ SSH_KEY_PATH="~/.ssh/kosa-msa3.pem"
 
 echo "Nginx 업데이트를 원격 EC2 인스턴스에서 실행합니다."
 
-ssh -i ${SSH_KEY_PATH} ${REMOTE_EC2_USER}@${REMOTE_EC2_IP} "bash -s" < update_nginx.sh ${BEFORE_PORT} ${AFTER_PORT}
+ssh -i ${SSH_KEY_PATH} ${REMOTE_EC2_USER}@${REMOTE_EC2_IP} "bash -s" < update-nginx.sh ${BEFORE_PORT} ${AFTER_PORT}
 
 echo "Nginx 업데이트 완료."
 
