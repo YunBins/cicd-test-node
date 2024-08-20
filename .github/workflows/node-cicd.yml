@@ -24,7 +24,7 @@ jobs:
       - name: 📌 zip 파일 생성
         run: |
           mkdir deploy-node
-          cp -r ./src/* ./deploy-node/
+          cp -r src/* ./deploy-node/
           cp ./docker-compose-node.blue.yml ./deploy-node/
           cp ./docker-compose-node.green.yml ./deploy-node/
           cp ./appspec.yml ./deploy-node/
