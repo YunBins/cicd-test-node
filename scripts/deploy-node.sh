@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 cd /home/ec2-user/app
 
 DOCKER_APP_NAME=node
@@ -15,7 +16,6 @@ if [ -z "$EXIST_BLUE" ]; then
         AFTER_COLOR="blue"
         BEFORE_PORT=7072
         AFTER_PORT=7071
-
 else
         echo "green up"
         sudo docker-compose -p ${DOCKER_APP_NAME}-green -f docker-compose-node.green.yml up -d
@@ -49,10 +49,16 @@ then
 fi
 
 # 3
-sudo sed -i "s/${BEFORE_PORT}/${AFTER_PORT}/" /etc/nginx/conf.d/service-url.inc
-sudo nginx -s reload
-echo "배포완료."
+REMOTE_EC2_USER="ec2-user"
+REMOTE_EC2_IP="13.125.220.15"
+SSH_KEY_PATH="~/.ssh/kosa-msa3.pem"
+
+echo "Nginx 업데이트를 원격 EC2 인스턴스에서 실행합니다."
+
+ssh -i ${SSH_KEY_PATH} ${REMOTE_EC2_USER}@${REMOTE_EC2_IP} "bash -s" < update_nginx.sh ${BEFORE_PORT} ${AFTER_PORT}
+
+echo "Nginx 업데이트 완료."
 
 # 4
 echo "$BEFORE_COLOR server down(port:${BEFORE_PORT})"
-sudo docker-compose -p test-${BEFORE_COLOR} -f /home/ubuntu/docker-compose.${BEFORE_COLOR}.yml down
+sudo docker-compose -p ${DOCKER_APP_NAME}-${BEFORE_COLOR} -f docker-compose-node.${BEFORE_COLOR}.yml down
